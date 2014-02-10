@@ -65,6 +65,34 @@ ToDo.prototype.removeItem = function(uid) {
   }
 };
 
+/**
+ * @param {Number} uid id of item to be completed
+ */
+ToDo.prototype.completeItem = function(uid) {
+  for (var i in this.items) {
+    if (this.items[i].id === uid) {
+      this.items[i].isCompleted = true;
+      this.save();
+
+      return this.render();
+    }
+  }
+};
+
+/**
+ * @param {Number} uid id of item to be un-completed
+ */
+ToDo.prototype.unCompleteItem = function(uid) {
+  for (var i in this.items) {
+    if (this.items[i].id === uid) {
+      this.items[i].isCompleted = false;
+      this.save();
+
+      return this.render();
+    }
+  }
+};
+
 window.onload = function() {
   if (!sessionStorage.getItem('toDoItems')) {
     var exampleItems = [{
